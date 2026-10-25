@@ -3,6 +3,7 @@ import express from 'express';
 import { env } from './config/env.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { authRouter } from './routes/auth.routes.js';
+import { scoreRouter } from './routes/score.routes.js';
 
 export function createApp() {
   const app = express();
@@ -19,6 +20,7 @@ export function createApp() {
   });
 
   app.use(authRouter);
+  app.use(scoreRouter);
 
   app.use(errorHandler);
 
