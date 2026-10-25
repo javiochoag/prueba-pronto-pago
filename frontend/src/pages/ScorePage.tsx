@@ -51,22 +51,27 @@ export function ScorePage() {
   }
 
   return (
-    <main className="page">
+    <main className="shell shell--app">
       <header className="topbar">
         <div>
-          <strong>Consulta de Riesgo</strong>
-          <span className="muted">
-            {' '}
-            · {user.role === 'admin' ? 'Administrador' : 'Usuario'}
+          <div className="topbar-brand">Consulta de Riesgo</div>
+          <span className="topbar-meta">
+            {user.role === 'admin' ? 'Administrador' : 'Usuario'}
           </span>
         </div>
-        <button type="button" className="linkish" onClick={logout}>
+        <button type="button" className="btn-text" onClick={logout}>
           Cerrar sesión
         </button>
       </header>
 
-      <section className="card-panel">
-        <h1>Score financiero</h1>
+      <section className="panel panel--app">
+        <h1 className="section-title">Score financiero</h1>
+        <p className="section-lead">
+          {isAdmin
+            ? 'Ingresa un RUT para obtener su score determinístico.'
+            : 'Consulta el score asociado a tu RUT.'}
+        </p>
+
         <form className="form" onSubmit={onSubmit}>
           {isAdmin ? (
             <label>
@@ -91,20 +96,33 @@ export function ScorePage() {
             </p>
           )}
 
-          <button type="submit" disabled={loading || (!isAdmin && !fixedRut)}>
+          <button
+            className="btn"
+            type="submit"
+            disabled={loading || (!isAdmin && !fixedRut)}
+          >
             {loading ? 'Consultando…' : 'Consultar'}
           </button>
         </form>
 
         {result && (
           <div className="result" aria-live="polite">
-            <p>
-              <span className="muted">RUT</span> {result.rut}
+            <p className="result-rut">
+              RUT <strong>{result.rut}</strong>
             </p>
             <p className="score">{result.score}</p>
-            <p className="muted">
-              Fecha:{' '}
-              {new Date(result.fecha).toLocaleString('es-CL', {
+            <p className="result-date">
+              Consulta del{' '}
+              {new Date(result.fecha).toLocaleDateString('es-CL', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                timeZone: 'UTC',
+              })}{' '}
+              a las{' '}
+              {new Date(result.fecha).toLocaleTimeString('es-CL', {
+                hour: '2-digit',
+                minute: '2-digit',
                 timeZone: 'UTC',
               })}{' '}
               UTC

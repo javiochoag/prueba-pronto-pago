@@ -42,10 +42,16 @@ export function LoginPage() {
   }
 
   return (
-    <main className="page">
-      <section className="card-panel">
-        <h1>Consulta de Riesgo Financiero</h1>
-        <p className="muted">Inicia sesión para consultar el score.</p>
+    <main className="shell shell--login">
+      <div className="brand-block">
+        <p className="brand-mark">Fintech · Riesgo</p>
+        <h1 className="brand-title">Consulta de Riesgo Financiero</h1>
+        <p className="brand-lead">
+          Evalúa el score crediticio asociado a un RUT con acceso según tu rol.
+        </p>
+      </div>
+
+      <section className="panel" aria-label="Inicio de sesión">
         <form className="form" onSubmit={onSubmit}>
           <label>
             Email
@@ -54,6 +60,7 @@ export function LoginPage() {
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="tu@correo.com"
               required
             />
           </label>
@@ -64,6 +71,7 @@ export function LoginPage() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
               required
             />
           </label>
@@ -72,7 +80,7 @@ export function LoginPage() {
               {error}
             </p>
           )}
-          <button type="submit" disabled={loading}>
+          <button className="btn" type="submit" disabled={loading}>
             {loading ? 'Ingresando…' : 'Ingresar'}
           </button>
         </form>
