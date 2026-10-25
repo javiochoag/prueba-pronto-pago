@@ -1,6 +1,8 @@
 import cors from 'cors';
 import express from 'express';
 import { env } from './config/env.js';
+import { errorHandler } from './middlewares/errorHandler.js';
+import { authRouter } from './routes/auth.routes.js';
 
 export function createApp() {
   const app = express();
@@ -16,7 +18,9 @@ export function createApp() {
     res.status(200).json({ status: 'ok' });
   });
 
-  // Rutas de negocio se agregan en etapas posteriores.
+  app.use(authRouter);
+
+  app.use(errorHandler);
 
   return app;
 }

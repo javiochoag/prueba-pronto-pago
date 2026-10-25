@@ -4,4 +4,4 @@ Monorepo del MVP *Consulta de Riesgo Financiero*.
 
 ## Estado
 
-**Etapa 1 — Scaffold** (en revisión): estructura `backend/` + `frontend/`, TypeScript, env, CORS, Vitest/Supertest y health check. Sin auth ni score todavía.
+**Etapa 2 — Auth + lockout** (en revisión): `POST /login`, JWT, usuarios mock (`User`), bloqueo tras 3 intentos fallidos. Tests LOG-* y LOCK-* OK. Sin score todavía.
