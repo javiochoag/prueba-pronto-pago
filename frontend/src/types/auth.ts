@@ -5,3 +5,9 @@ export interface AuthUser {
   role: Role;
   rut?: string;
 }
+
+export interface ScoreResponse {
+  rut: string;
+  score: number;
+  fecha: string;
+}
